@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useEffect } from 'react'
+import { Suspense, useEffect, useRef } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Connect } from '../../screens/Connect'
 import { useWallet } from '../../wallet/WalletProvider'
@@ -25,17 +25,29 @@ function ConnectRoute() {
 
   const next = safeNext(searchParams.get('next'))
 
-  // Once a wallet is connected (real modal selection or the demo path), move on
-  // — back to whatever the visitor was originally reaching for, if a guard sent
-  // them here, otherwise the default first stop.
+  // A restored session sets `connected` on mount without any user input, so the
+  // fact of being connected must not alone bounce a returning user off this
+  // screen — they came here to review or switch their connection. Only an
+  // explicit connect action performed here should advance to the first stop.
+  const didConnectRef = useRef(false)
+
+  // Once the visitor connects on this page (real modal selection or the demo
+  // path), move on — back to whatever they were originally reaching for, if a
+  // guard sent them here, otherwise the default first stop.
   useEffect(() => {
-    if (connected) router.replace(next ?? '/deposit')
+    if (connected && didConnectRef.current) router.replace(next ?? '/deposit')
   }, [connected, router, next])
 
   return (
     <Connect
-      onWallet={() => void connect()}
-      onNew={() => connectDemo()}
+      onWallet={() => {
+        didConnectRef.current = true
+        void connect()
+      }}
+      onNew={() => {
+        didConnectRef.current = true
+        connectDemo()
+      }}
       onCancel={() => router.push('/explore')}
     />
   )
