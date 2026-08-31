@@ -1,0 +1,18 @@
+{
+  "default_branch": "main",
+  "branches": [
+    "fix/399-connect-restored-session",
+    "main",
+    "origin"
+  ],
+  "parent": {
+    "fix/399-connect-restored-session": "main",
+    "main": null,
+    "origin": "main"
+  },
+  "order": [
+    "main",
+    "fix/399-connect-restored-session",
+    "origin"
+  ]
+}
