@@ -20,3 +20,6 @@ npm_cache_temp
 # design handoff bundle — reference only, not part of the app
 .design-handoff
 .vercel
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
