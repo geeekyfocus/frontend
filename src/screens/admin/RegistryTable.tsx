@@ -1,9 +1,10 @@
 'use client'
 
-import { useMemo, useState, type CSSProperties } from 'react'
+import { useMemo, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Button } from '@/components'
 import { type RegistryEntry } from '@/data/admin'
+import { tableStyle, thBase, tdStyle, numCell, typePill, inputStyle } from '@/screens/styles'
 import { clampScore, parseFundedNum } from './utils'
 
 /**
@@ -319,62 +320,4 @@ function ScoreField({
       />
     </label>
   )
-}
-
-const tableStyle: CSSProperties = {
-  width: '100%',
-  borderCollapse: 'collapse',
-  fontFamily: 'var(--font-body)',
-  fontSize: 'var(--type-small)',
-}
-
-const thBase: CSSProperties = {
-  background: 'var(--ink-06)',
-  padding: '10px 14px',
-  position: 'sticky',
-  top: 0,
-  whiteSpace: 'nowrap',
-  zIndex: 1,
-}
-
-const tdStyle: CSSProperties = {
-  padding: '12px 14px',
-  verticalAlign: 'middle',
-  color: 'var(--ink)',
-}
-
-const numCell: CSSProperties = {
-  fontFamily: 'var(--font-data)',
-  fontFeatureSettings: '"tnum" 1',
-  textAlign: 'right',
-  whiteSpace: 'nowrap',
-}
-
-const typePill: CSSProperties = {
-  display: 'inline-flex',
-  alignItems: 'center',
-  height: 22,
-  padding: '0 9px',
-  fontFamily: 'var(--font-body)',
-  fontSize: 'var(--type-eyebrow)',
-  fontWeight: 500,
-  color: 'var(--ink)',
-  background: 'var(--ink-06)',
-  border: '1px solid var(--ink-12)',
-  borderRadius: 'var(--radius-pill)',
-  whiteSpace: 'nowrap',
-}
-
-const inputStyle: CSSProperties = {
-  width: 72,
-  height: 36,
-  padding: '0 10px',
-  fontFamily: 'var(--font-data)',
-  fontSize: 'var(--type-small)',
-  fontFeatureSettings: '"tnum" 1',
-  color: 'var(--ink)',
-  background: 'var(--surface)',
-  border: '1px solid var(--ink-12)',
-  borderRadius: 'var(--radius-input)',
-  outline: 'none',
 }
