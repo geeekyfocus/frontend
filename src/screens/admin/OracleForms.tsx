@@ -57,13 +57,7 @@ export function OracleForms({ projects, liquid, onPushScores, onFund }: OracleFo
   }
 
   return (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-        gap: 16,
-      }}
-    >
+    <div style={gridStyle}>
       {/* Push score update */}
       <Panel title={t('panelPushTitle')} hint={t('panelPushHint')}>
         <Field label={t('fieldProject')}>
@@ -74,15 +68,15 @@ export function OracleForms({ projects, liquid, onPushScores, onFund }: OracleFo
             label={t('fieldProject')}
           />
         </Field>
-        <div style={{ display: 'flex', gap: 12 }}>
-          <Field label={t('fieldCredit')} style={{ flex: 1 }}>
+        <div style={formRowStyle}>
+          <Field label={t('fieldCredit')} style={fieldGrowStyle}>
             <NumberInput
               value={credit}
               onChange={setCredit}
               placeholder={target ? String(target.credit) : '0'}
             />
           </Field>
-          <Field label={t('fieldGreen')} style={{ flex: 1 }}>
+          <Field label={t('fieldGreen')} style={fieldGrowStyle}>
             <NumberInput
               value={green}
               onChange={setGreen}
@@ -117,7 +111,7 @@ export function OracleForms({ projects, liquid, onPushScores, onFund }: OracleFo
           />
         </Field>
         <Field label={t('fieldAmount')}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <div style={inputGroupStyle}>
             <input
               inputMode="decimal"
               placeholder="0.00"
@@ -135,35 +129,17 @@ export function OracleForms({ projects, liquid, onPushScores, onFund }: OracleFo
                 borderColor: overLiquid ? 'var(--ember)' : undefined,
               }}
             />
-            <span
-              style={{
-                fontFamily: 'var(--font-data)',
-                fontSize: 'var(--type-caption)',
-                color: 'var(--ink-60)',
-              }}
-            >
+            <span style={dataCaptionStyle}>
               USDC
             </span>
           </div>
           {overLiquid && (
             <div
               role="status"
-              style={{
-                marginTop: 10,
-                padding: '10px 14px',
-                background: 'var(--solar-12)',
-                border: '1px solid var(--solar-24)',
-                borderRadius: 'var(--radius-input)',
-              }}
+              style={warningBoxStyle}
             >
               <p
-                style={{
-                  margin: 0,
-                  fontFamily: 'var(--font-body)',
-                  fontSize: 'var(--type-small)',
-                  color: 'var(--ink)',
-                  fontWeight: 600,
-                }}
+                style={warningTextStyle}
               >
                 {t('fundExceeds')}
               </p>
@@ -173,11 +149,7 @@ export function OracleForms({ projects, liquid, onPushScores, onFund }: OracleFo
         <p style={helpText}>
           {t('liquidHint')}{' '}
           <span
-            style={{
-              fontFamily: 'var(--font-data)',
-              fontFeatureSettings: '"tnum" 1',
-              color: 'var(--ink)',
-            }}
+            style={moneyStyle}
           >
             ${formatMoney(liquid)}
           </span>
@@ -200,21 +172,13 @@ export function OracleForms({ projects, liquid, onPushScores, onFund }: OracleFo
 function Panel({ title, hint, children }: { title: string; hint: string; children: ReactNode }) {
   return (
     <div style={panelStyle}>
-      <div style={{ marginBottom: 12 }}>
-        <h3
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontWeight: 700,
-            fontSize: 'var(--type-body)',
-            margin: 0,
-            color: 'var(--ink)',
-          }}
-        >
+      <div style={panelHeaderStyle}>
+        <h3 style={panelTitleStyle}>
           {title}
         </h3>
         <p style={{ ...helpText, marginTop: 4 }}>{hint}</p>
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>{children}</div>
+      <div style={panelBodyStyle}>{children}</div>
     </div>
   )
 }
@@ -302,4 +266,71 @@ const helpText: CSSProperties = {
   fontSize: 'var(--type-caption)',
   lineHeight: 1.5,
   color: 'var(--ink-60)',
+}
+
+const gridStyle: CSSProperties = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+  gap: 16,
+}
+
+const formRowStyle: CSSProperties = {
+  display: 'flex',
+  gap: 12,
+}
+
+const fieldGrowStyle: CSSProperties = {
+  flex: 1,
+}
+
+const inputGroupStyle: CSSProperties = {
+  display: 'flex',
+  alignItems: 'center',
+  gap: 8,
+}
+
+const dataCaptionStyle: CSSProperties = {
+  fontFamily: 'var(--font-data)',
+  fontSize: 'var(--type-caption)',
+  color: 'var(--ink-60)',
+}
+
+const warningBoxStyle: CSSProperties = {
+  marginTop: 10,
+  padding: '10px 14px',
+  background: 'var(--solar-12)',
+  border: '1px solid var(--solar-24)',
+  borderRadius: 'var(--radius-input)',
+}
+
+const warningTextStyle: CSSProperties = {
+  margin: 0,
+  fontFamily: 'var(--font-body)',
+  fontSize: 'var(--type-small)',
+  color: 'var(--ink)',
+  fontWeight: 600,
+}
+
+const moneyStyle: CSSProperties = {
+  fontFamily: 'var(--font-data)',
+  fontFeatureSettings: '"tnum" 1',
+  color: 'var(--ink)',
+}
+
+const panelTitleStyle: CSSProperties = {
+  fontFamily: 'var(--font-display)',
+  fontWeight: 700,
+  fontSize: 'var(--type-body)',
+  margin: 0,
+  color: 'var(--ink)',
+}
+
+const panelHeaderStyle: CSSProperties = {
+  marginBottom: 12,
+}
+
+const panelBodyStyle: CSSProperties = {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 12,
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, type CSSProperties, type ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { useTranslations } from 'next-intl'
 import { Button, Tag, Card, CheckBoldIcon, FormField, FormInput } from '@/components'
 import {
@@ -9,6 +9,7 @@ import {
   type ApplicationStage,
   type ProjectType,
 } from '@/data/creator'
+import { cardTitle, subtle } from '@/styles/shared'
 
 /**
  * CreatorApplication — the whitelist door for project creators. Plain criteria
@@ -342,17 +343,3 @@ function Label({ htmlFor, children }: { htmlFor: string; children: ReactNode }) 
   )
 }
 
-const cardTitle: CSSProperties = {
-  fontFamily: 'var(--font-display)',
-  fontWeight: 700,
-  fontSize: 'var(--type-h5)',
-  margin: '0 0 8px',
-  color: 'var(--ink)',
-  letterSpacing: '-0.01em',
-}
-const subtle: CSSProperties = {
-  fontFamily: 'var(--font-body)',
-  fontSize: 'var(--type-small)',
-  lineHeight: 1.5,
-  color: 'var(--ink-60)',
-}
