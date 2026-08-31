@@ -91,7 +91,7 @@ export function ProjectBuilder() {
           />
         </Field>
 
-        <div style={{ marginBottom: 18 }}>
+        <div style={fieldSpacing}>
           <Label>{t('fieldProjectType')}</Label>
           <div
             style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}
@@ -158,12 +158,7 @@ export function ProjectBuilder() {
             <p
               id={goalErrorId}
               role="alert"
-              style={{
-                margin: '8px 0 0',
-                fontFamily: 'var(--font-body)',
-                fontSize: 'var(--type-caption)',
-                color: 'var(--ember)',
-              }}
+              style={errorText}
             >
               {goalError}
             </p>
@@ -195,12 +190,7 @@ export function ProjectBuilder() {
             }}
           />
           <span
-            style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: 'var(--type-caption)',
-              fontWeight: 600,
-              color: 'var(--ink)',
-            }}
+            style={labelText}
           >
             {t('previewLabel')}
           </span>
@@ -289,23 +279,13 @@ function DropZone({
       />
       <UploadIcon style={{ color: 'var(--ink)' }} />
       <div
-        style={{
-          fontFamily: 'var(--font-body)',
-          fontSize: 'var(--type-caption)',
-          fontWeight: 600,
-          color: 'var(--ink)',
-        }}
+        style={labelText}
       >
         {label}
       </div>
       <div
         id={hintId}
-        style={{
-          fontFamily: 'var(--font-body)',
-          fontSize: 'var(--type-eyebrow)',
-          color: 'var(--ink-60)',
-          lineHeight: 1.4,
-        }}
+        style={hintText}
       >
         {selectedFiles || hint}
       </div>
@@ -323,7 +303,7 @@ function Field({
   children: ReactNode
 }) {
   return (
-    <div style={{ marginBottom: 18 }}>
+    <div style={fieldSpacing}>
       <Label htmlFor={htmlFor}>{label}</Label>
       {children}
     </div>
@@ -334,14 +314,7 @@ function Label({ htmlFor, children }: { htmlFor?: string; children: ReactNode })
   return (
     <label
       htmlFor={htmlFor}
-      style={{
-        display: 'block',
-        fontFamily: 'var(--font-body)',
-        fontSize: 'var(--type-caption)',
-        fontWeight: 600,
-        color: 'var(--ink)',
-        marginBottom: 8,
-      }}
+      style={fieldLabel}
     >
       {children}
     </label>
@@ -374,4 +347,31 @@ const inputStyle: CSSProperties = {
   borderRadius: 'var(--radius-input)',
   outline: 'none',
   boxSizing: 'border-box',
+}
+
+const labelText: CSSProperties = {
+  fontFamily: 'var(--font-body)',
+  fontSize: 'var(--type-caption)',
+  fontWeight: 600,
+  color: 'var(--ink)',
+}
+const fieldLabel: CSSProperties = {
+  ...labelText,
+  display: 'block',
+  marginBottom: 8,
+}
+const fieldSpacing: CSSProperties = {
+  marginBottom: 18,
+}
+const hintText: CSSProperties = {
+  fontFamily: 'var(--font-body)',
+  fontSize: 'var(--type-eyebrow)',
+  color: 'var(--ink-60)',
+  lineHeight: 1.4,
+}
+const errorText: CSSProperties = {
+  margin: '8px 0 0',
+  fontFamily: 'var(--font-body)',
+  fontSize: 'var(--type-caption)',
+  color: 'var(--ember)',
 }

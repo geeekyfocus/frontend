@@ -125,13 +125,9 @@ export function CreatorDashboard({ data = CREATOR_DASHBOARD }: CreatorDashboardP
         </Card>
 
         <Card style={{ padding: 22, height: '100%', boxSizing: 'border-box' }}>
+        <Card style={cardInner}>
           <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              marginBottom: 12,
-            }}
+            style={sectionHeaderTop}
           >
             <h4 style={cardTitle}>{t('dashOracleScores')}</h4>
             <span
@@ -145,7 +141,7 @@ export function CreatorDashboard({ data = CREATOR_DASHBOARD }: CreatorDashboardP
             </span>
           </div>
           <div style={{ display: 'flex', gap: 20, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+            <div style={scoreColumn}>
               <ScoreGauge
                 value={data.creditScore}
                 label={t('dashCreditLabel')}
@@ -154,7 +150,7 @@ export function CreatorDashboard({ data = CREATOR_DASHBOARD }: CreatorDashboardP
               />
               <Sparkline points={data.creditHistory} aria-label={t('dashCreditTrend')} />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+            <div style={scoreColumn}>
               <ScoreGauge
                 value={data.greenScore}
                 label={t('dashGreenLabel')}
@@ -178,7 +174,7 @@ export function CreatorDashboard({ data = CREATOR_DASHBOARD }: CreatorDashboardP
       >
         <Card>
           <h4 style={cardTitle}>{t('dashOracleEvalTitle')}</h4>
-          <p style={{ ...subtle, margin: '0 0 16px' }}>{t('dashOracleEvalSub')}</p>
+          <p style={subtleBlock}>{t('dashOracleEvalSub')}</p>
           <ul
             style={{
               listStyle: 'none',
@@ -223,13 +219,9 @@ export function CreatorDashboard({ data = CREATOR_DASHBOARD }: CreatorDashboardP
         </Card>
 
         <Card style={{ padding: 22, height: '100%', boxSizing: 'border-box' }}>
+        <Card style={cardInner}>
           <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              marginBottom: 8,
-            }}
+            style={sectionHeaderBottom}
           >
             <h4 style={cardTitle}>{t('dashUpdatesTitle')}</h4>
             <span style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'var(--ink-40)' }}>
@@ -325,4 +317,39 @@ const subtle: CSSProperties = {
   fontSize: 'var(--type-small)',
   lineHeight: 1.5,
   color: 'var(--ink-60)',
+}
+
+const subtleBlock: CSSProperties = {
+  fontFamily: 'var(--font-body)',
+  fontSize: 'var(--type-small)',
+  lineHeight: 1.5,
+  color: 'var(--ink-60)',
+  margin: '0 0 16px',
+}
+
+const cardInner: CSSProperties = {
+  padding: 22,
+  height: '100%',
+  boxSizing: 'border-box',
+}
+
+const scoreColumn: CSSProperties = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: 8,
+}
+
+const sectionHeaderTop: CSSProperties = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  marginBottom: 12,
+}
+
+const sectionHeaderBottom: CSSProperties = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  marginBottom: 8,
 }
